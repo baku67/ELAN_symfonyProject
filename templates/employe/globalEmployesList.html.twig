@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Employés de {{ entreprise.raisonSociale }}{% endblock %}
+{% block title %}Tout les employés{% endblock %}
 
 {% block body %}
 
-    <h1>Liste des employés de l'entreprise "{{ entreprise.raisonSociale }}"</h1>
+    <h1>Liste globale de tout les employés</h1>
 
     {% for employe in employesArray  %}
         <p>{{ employe.nom }}</p>

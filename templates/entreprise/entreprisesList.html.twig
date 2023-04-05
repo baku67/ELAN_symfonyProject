@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les entreprises{% endblock %}
+
+{% block body %}
+
+    <h1>Liste globale de toutes les entreprises</h1>
+
+    {% for entreprise in entreprisesArray  %}
+        <a href="entrepriseEmployesListe/{{entreprise.id}}">{{ entreprise.raisonSociale }}</a>
+    {% endfor %}
+
+{% endblock %}
