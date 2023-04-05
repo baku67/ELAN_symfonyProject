@@ -1,0 +1,29 @@
+Dans dossier projet:
+
+
+  Installer composer: https://getcomposer.org (composer --version)
+
+  Install Scoop (scoop -v):
+    > Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
+    > irm get.scoop.sh | iex
+
+  Download symfonyCLI (Windows, using scoop) (symfony -v / symfony console about)
+    > scoop install symfony-cli
+
+    > composer install (pour redeployer dependances .vendor lors clonage projet git (trop volumineux pour git))
+    OU
+    > symfony new --webapp my_project
+      > OU LTS ("Long Time Support": symfony new --full mon_projet_lts --version=lts)
+
+  Lancement du projet (localhost / 127.0.0.1:8000 / http://localhost/ELAN_Symfony/elan_projetSymfony/public/)
+    > symfony serve -d (/!\ Pour garder la main dans l'invite de commande)
+    > symfony serve
+
+  Stopper le projet
+    > symfony server:stop
+
+
+
+
+  Pour passer en https 
+  https://youtu.be/kuKb3VfcTWE?t=1084

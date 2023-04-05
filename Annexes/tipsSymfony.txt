@@ -1,0 +1,7 @@
+./src/Repository = Manager (communication avec la BDD)
+
+./templates = View
+
+./templates/base.html.twig = layout (twig = moteur de template, Laravel:"blade")
+
+./public : contient dossier css/js/img et index
