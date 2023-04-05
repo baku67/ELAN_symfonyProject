@@ -5,3 +5,42 @@
 ./templates/base.html.twig = layout (twig = moteur de template, Laravel:"blade")
 
 ./public : contient dossier css/js/img et index
+
+Terminal: Ctrl+C Pour interrompre manip 
+
+
+
+/!\/!\/!\ Ne jamais modifier la BDD à partir de HeidiSQL ou autre, toujours modifier à partir du frameWork
+
+"symfony console doctrine:database:create" prend le db_name du connexionPath dans .env (voir db vide créé dans Heidi)
+"symfony console make:entity nom_Entité" Modifie/Créer l'entité avec sa class (ET créer automatiquement l'id primaire) + créer le repository(=Manager)
+    On peut ajouter __toString dans les entités (pas généré auto)
+"symfony console make:entity": Demande le nom de l'Entité à créer ou modifier
+
+
+Repository=Manager (contient des méthodes add(), remove(), etc), sont générés automatiquement à la création de l'entité coresspondante
+ => Précise (en commentaire) qu'il extend ServiceEntityRepository (Manager général), et dispose donc des méthodes comme find($id), findOneBy(array, creteria, order), findAll(), etc...
+ => "lié" en commentaire dans l'entité (juste au dessus de la class)
+ => 1 entité / 1 repository
+
+/!\ Pour relations ("OneToMany", "ManyToOne") entres entités: Faire attention à l'entité de départ (les 2 sens sont possibles mais ça inverse le type de relation)
+Pour ajouter relation: passer par commande modifEntité "symfony console make:entity nom_Entité"
+Donner un nom au champ de la relation/Collection de l'entité lié (ex: dans Entreprise-> champ employeS ici, mais dans le cas d'une relation OneToOne ça aurait été employe)
+Donner le type ("ManyToOne", "OneToMany", "ManyToMany", "relation") [OneToOne jamais utilisé]
+    -> "relation": explicite avec des phrases les options possibles (proc apres l'input de l'entité à lié)
+Donner l'entité avec qui faire la relation
+Donner le nom du champ de la relation dans l'entité cible/liée (propose un nom OK-tier en fonction du type de relation)
+Dire si la relation peut etre nulle (tout le temps non?): contrainte de clée étrangère
+Dire si on veut que le(s) entités liée(s) à l'entité de départ sont supprimer si delete entité de départ ("Delete on cascade")
+=> Apres ajout relation:    
+    -> On constate l'ajout (ici d'une arrayCollection) employes dans le __construct entreprise
+    -> On constate l'ajout auto de méthodes "addEmploye"/"removeEmploye" en plus du getter
+
+
+Migration (pour générer les tables et relations en base de données)
+EN 2 lignes (préparation puis exécution)
+    => "symfony console make:migration" (préparation: créer les requêtes SQL, fichier dispo dans ./migrations)
+    => "symfony console doctrine:migrationS:migrate"
+    => Sure? Oui
+    => Constater sur Heidi (entités, champs, clées étrangères, NULLable)
+

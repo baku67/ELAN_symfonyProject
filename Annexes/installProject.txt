@@ -16,6 +16,7 @@ Dans dossier projet:
       > OU LTS ("Long Time Support": symfony new --full mon_projet_lts --version=lts)
 
   Lancement du projet (localhost / 127.0.0.1:8000 / http://localhost/ELAN_Symfony/elan_projetSymfony/public/)
+    (Bien se placer dans le dossier racine du projet)
     > symfony serve -d (/!\ Pour garder la main dans l'invite de commande)
     > symfony serve
 
