@@ -6,8 +6,11 @@
 
     <h1>Liste des employés de l'entreprise "{{ entreprise.raisonSociale }}"</h1>
 
+    <a href="/accueil">Retour</a>
+    <br>
+
     {% for employe in employesArray  %}
-        <p>{{ employe.nom }}</p>
+        <a href="/employeDetail/{{ employe.id }}">{{ employe.nom }}</a>
     {% endfor %}
 
 {% endblock %}

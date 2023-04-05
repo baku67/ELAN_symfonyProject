@@ -16,11 +16,10 @@ class EmployeController extends AbstractController
     public function index(): Response
     {
         return $this->render('employe/index.html.twig', [
-            'testKey' => 'testData',
         ]);
     }
 
-
+    // Récupération du tableau de tout les employés 
     #[Route('/employesListe', name: 'app_employeList')]
     public function employeList(EntityManagerInterface $entityManager): Response
     {
@@ -31,13 +30,12 @@ class EmployeController extends AbstractController
         $employesList = $repoEmploye->findAll();
 
         return $this->render('employe/globalEmployesList.html.twig', [
-            'testKey' => 'testTableauEmployé',
             'employesArray' => $employesList
         ]);
     }
 
 
-    // récupération du tableau d'employés de l'entreprise
+    // Récupération du tableau d'employés de l'entreprise
     #[Route('/entrepriseEmployesListe/{idEntreprise}', name: 'app_entrepriseEmployesListe')]
     public function entrepriseEmployesListe(EntityManagerInterface $entityManager, int $idEntreprise): Response
     {
@@ -48,11 +46,26 @@ class EmployeController extends AbstractController
         $employesList = $repoEmploye->findBy(['entreprise' => $entreprise->getId()]);
 
         return $this->render('employe/employesList.html.twig', [
-            'testKey' => 'testTableauEmployé',
             'employesArray' => $employesList,
             'entreprise' => $entreprise
             // 'entrepriseName' => $repoEntreprise->find($entreprise)->getRaisonSociale(),
             // OU 'entreprise' => $repoEntreprise->find($idEntreprise) (et récup le .nom dans la vue),
         ]);
     }
+
+
+    // Détail de l'employé
+    #[Route('/employeDetail/{idEmploye}', name: 'app_employeDetail')]
+    public function employeDetail(EntityManagerInterface $entityManager, int $idEmploye): Response
+    {
+        $repoEmploye = $entityManager->getRepository(Employe::class);
+
+        $employe = $repoEmploye->find($idEmploye);
+
+        return $this->render('employe/employeDetail.html.twig', [
+            'employe' => $employe
+        ]);
+    }
+
+
 }

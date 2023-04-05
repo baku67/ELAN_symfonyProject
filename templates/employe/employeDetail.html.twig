@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employé: {{ employe.prenom }} {{ employe.nom }}{% endblock %}
+
+{% block body %}
+
+    <h1>Employé: {{ employe.prenom }} {{ employe.nom }}"</h1>
+
+    {# previousPage JS plutot car cette page peut venir de listEmploye ou de globalListEmploye #}
+    <a href="/employesListe">Retour</a>
+    <input id="previousPageBtn" action="action" onclick="window.history.go(-1); return false;" type="submit" value="Retour" />
+    <br>
+
+    <a href="/entrepriseDetail/{{ employe.entreprise.id }}">Entreprise: {{ employe.entreprise.raisonSociale }}</a>
+
+
+
+
+{% endblock %}

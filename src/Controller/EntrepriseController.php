@@ -30,10 +30,25 @@ class EntrepriseController extends AbstractController
         $entreprisesListe = $repoEntreprise->findAll();
 
         return $this->render('entreprise/entreprisesList.html.twig', [
-            'testKey' => 'testTableauEmployé',
             'entreprisesArray' => $entreprisesListe
         ]);
     }
+
+
+    // Détail de l'entreprise
+    #[Route('/entrepriseDetail/{idEntreprise}', name: 'app_entrepriseDetail')]
+    public function entrepriseDetail(EntityManagerInterface $entityManager, int $idEntreprise): Response
+    {
+        $repoEntreprise = $entityManager->getRepository(Entreprise::class);
+
+        $entreprise = $repoEntreprise->find($idEntreprise);
+
+        return $this->render('entreprise/entrepriseDetail.html.twig', [
+            'entreprise' => $entreprise
+        ]);
+    }
+    
+    
 
 
 }

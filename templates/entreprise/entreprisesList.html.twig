@@ -6,8 +6,11 @@
 
     <h1>Liste globale de toutes les entreprises</h1>
 
+    <a href="accueil">Retour</a>
+    <br><br>
+
     {% for entreprise in entreprisesArray  %}
-        <a href="entrepriseEmployesListe/{{entreprise.id}}">{{ entreprise.raisonSociale }}</a>
+        <a href="/entrepriseDetail/{{entreprise.id}}">{{ entreprise.raisonSociale }}</a>
     {% endfor %}
 
 {% endblock %}

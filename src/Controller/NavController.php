@@ -16,10 +16,16 @@
         #[Route('', name: 'app_homepage')]
         public function homepage(EntityManagerInterface $entityManager): Response
         {
-            return $this->render('index.html.twig', [
-                'testKey' => 'testData',
+            return $this->render('homepage.html.twig', [
             ]);
-            // return $this->redirectToRoute('homepage');
+    
+        }
+
+        #[Route('accueil', name: 'app_accueil')]
+        public function accueil(EntityManagerInterface $entityManager): Response
+        {
+            return $this->render('homepage.html.twig', [
+            ]);
     
         }
 
