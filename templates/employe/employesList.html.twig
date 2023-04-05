@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des employés de l'entreprise VAR{% endblock %}
+
+{% block body %}
+
+    <h1>Liste des employés de l'entreprise "{{ entreprise.raisonSociale }}"</h1>
+
+    {% for employe in employesArray  %}
+        <p>{{ employe.nom }}</p>
+    {% endfor %}
+
+{% endblock %}
