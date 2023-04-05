@@ -35,15 +35,18 @@ class EntrepriseController extends AbstractController
     }
 
 
-    // Détail de l'entreprise
+    // Détail de l'entreprise (+ Récupération du tableau d'employés de l'entreprise)
     #[Route('/entrepriseDetail/{idEntreprise}', name: 'app_entrepriseDetail')]
     public function entrepriseDetail(EntityManagerInterface $entityManager, int $idEntreprise): Response
     {
         $repoEntreprise = $entityManager->getRepository(Entreprise::class);
+        $repoEmploye = $entityManager->getRepository(Employe::class);
 
         $entreprise = $repoEntreprise->find($idEntreprise);
+        $employesList = $repoEmploye->findBy(['entreprise' => $entreprise->getId()]);
 
         return $this->render('entreprise/entrepriseDetail.html.twig', [
+            'employesArray' => $employesList,
             'entreprise' => $entreprise
         ]);
     }

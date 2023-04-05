@@ -33,6 +33,9 @@ class Employe
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $ville = null;
 
+    #[ORM\Column(length: 50, options: ['default' => 'employe'])]
+    private ?string $poste = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +109,18 @@ class Employe
     public function setVille(?string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getPoste(): ?string
+    {
+        return $this->poste;
+    }
+
+    public function setPoste(string $poste): self
+    {
+        $this->poste = $poste;
 
         return $this;
     }

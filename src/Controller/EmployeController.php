@@ -35,23 +35,23 @@ class EmployeController extends AbstractController
     }
 
 
-    // Récupération du tableau d'employés de l'entreprise
-    #[Route('/entrepriseEmployesListe/{idEntreprise}', name: 'app_entrepriseEmployesListe')]
-    public function entrepriseEmployesListe(EntityManagerInterface $entityManager, int $idEntreprise): Response
-    {
-        $repoEmploye = $entityManager->getRepository(Employe::class);
-        $repoEntreprise = $entityManager->getRepository(Entreprise::class);
+    // Récupération du tableau d'employés de l'entreprise (Déplacé dans /entrepriseDetail)
+    // #[Route('/entrepriseEmployesListe/{idEntreprise}', name: 'app_entrepriseEmployesListe')]
+    // public function entrepriseEmployesListe(EntityManagerInterface $entityManager, int $idEntreprise): Response
+    // {
+    //     $repoEmploye = $entityManager->getRepository(Employe::class);
+    //     $repoEntreprise = $entityManager->getRepository(Entreprise::class);
 
-        $entreprise = $repoEntreprise->find($idEntreprise);
-        $employesList = $repoEmploye->findBy(['entreprise' => $entreprise->getId()]);
+    //     $entreprise = $repoEntreprise->find($idEntreprise);
+    //     $employesList = $repoEmploye->findBy(['entreprise' => $entreprise->getId()]);
 
-        return $this->render('employe/employesList.html.twig', [
-            'employesArray' => $employesList,
-            'entreprise' => $entreprise
-            // 'entrepriseName' => $repoEntreprise->find($entreprise)->getRaisonSociale(),
-            // OU 'entreprise' => $repoEntreprise->find($idEntreprise) (et récup le .nom dans la vue),
-        ]);
-    }
+    //     return $this->render('employe/employesList.html.twig', [
+    //         'employesArray' => $employesList,
+    //         'entreprise' => $entreprise
+    //         // 'entrepriseName' => $repoEntreprise->find($entreprise)->getRaisonSociale(),
+    //         // OU 'entreprise' => $repoEntreprise->find($idEntreprise) (et récup le .nom dans la vue),
+    //     ]);
+    // }
 
 
     // Détail de l'employé
