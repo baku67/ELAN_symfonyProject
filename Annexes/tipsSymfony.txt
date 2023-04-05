@@ -6,11 +6,17 @@
 
 ./public : contient dossier css/js/img et index
 
+
+Composer = "gestionnaire de dépendances / de packages"
+
 Terminal: Ctrl+C Pour interrompre manip 
 
 
 
+
 /!\/!\/!\ Ne jamais modifier la BDD à partir de HeidiSQL ou autre, toujours modifier à partir du frameWork
+
+Attention à bien se placer dans le dossier du projet !
 
 "symfony console doctrine:database:create" prend le db_name du connexionPath dans .env (voir db vide créé dans Heidi)
 "symfony console make:entity nom_Entité" Modifie/Créer l'entité avec sa class (ET créer automatiquement l'id primaire) + créer le repository(=Manager)
@@ -44,3 +50,40 @@ EN 2 lignes (préparation puis exécution)
     => Sure? Oui
     => Constater sur Heidi (entités, champs, clées étrangères, NULLable)
 
+
+Controller (symfony.com/current/doctrine.html#fetching-objects-from-the-database)
+    => Préférable de faire 1 controller par Entité (mais assez souple)
+    => "symfony console make:controller"
+    => Donner nom (PascalCase)
+    => Génère le controller et la vue index.html.twig (index dans des dossiers respectifs)
+        => le controller possède la méthode index() par defaut qui renvoi la vue coreespondante généré automatiquement   
+    => On pass les datas (comme Elan):
+        return $this->render('entreprise/index.html.twig', [
+            'name' => 'Basile'
+        ]);
+    => On récupère dans la vue twig (pas de tableau ici):
+        {{ name }} (équivalent à echo, ducoup attention si tableau)
+
+    Note: pareil que frameworkElan: redirecToRoute(route, params) ou return $this->render('truc/index.html, [params])
+
+    Route 
+        => précisée en commentaire au dessus de chaque méthode du controller (/!\ commentaire vital)
+        => 1 unique par méthode
+        => C'est un genre de raccourcis (équivalent au ctrl=truc&action=bidul)
+            ex: '/employe' est la route de la méthode index du EmployeController
+        => La route est "tapable" dans l'url (vu qu'elle sollicite le controller) ex "127.0.0.1:3306/employe"
+
+
+templates (installer extension "Twig Langages 2")
+    =>  {% block body %} 
+            Contenu injecté dans le layout (base.html.twig)
+        {% endblock %}
+    => Le index.html.twig est généré automatiquement avec le controller mais par la suite on ajoute manuellement les templates spécifiques
+    => data récupéré du controller sous la forme: {{ nomParamController }} (équivalent à echo, ducoup attention si tableau)
+    => Sur twig: foreach =
+        {% for element in tableauFromController %}        //(!inversé)
+            <p>{{ element.username}}</p>
+        {% endfor %}
+    => Sur twig: déclaration de var =
+        {% set bidulle = "bidulle" %}
+    => Voir doc Twig
