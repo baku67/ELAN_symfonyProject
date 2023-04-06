@@ -18,7 +18,7 @@
     {# TO DO: AJOUTER ICI LA LISTE DES EMPLOYES et maj redirections/routes #}
     <h2>Liste des employés</h2>
     {% for employe in employesArray  %}
-        <a href="/employeDetail/{{ employe.id }}">{{ employe.prenom }} {{ employe.nom | upper }}</a>
+        <a href="{{ path('app_employeDetail', {'id': employe.id}) }}">{{ employe.prenom }} {{ employe.nom | upper }}</a>
         <br>
     {% endfor %}
 

@@ -7,7 +7,7 @@
     <h1>Employé: {{ employe.prenom }} {{ employe.nom | upper }}</h1>
 
     {# previousPage JS plutot car cette page peut venir de listEmploye ou de globalListEmploye #}
-    <a href="/employesListe">Retour</a>
+    <a href="{{ path('app_employesListe') }}">Retour</a>
     <input id="previousPageBtn" action="action" onclick="window.history.go(-1); return false;" type="submit" value="Retour" />
     <br>
     
@@ -18,7 +18,7 @@
 
     <br><br>
     <h2>Emploi actuel</h2>
-    <p>Entreprise: <a href="/entrepriseDetail/{{ employe.entreprise.id }}">{{ employe.entreprise.raisonSociale }}</a></p>
+    <p>Entreprise: <a href="{{ path('app_entrepriseDetail', {'id':employe.entreprise.id}) }}">{{ employe.entreprise.raisonSociale }}</a></p>
     <p>Date d'embauche: {{ employe.dateEmbauche | date('m/d/Y')}}</p>
 
 

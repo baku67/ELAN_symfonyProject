@@ -20,7 +20,7 @@ class EmployeController extends AbstractController
     }
 
     // Récupération du tableau de tout les employés 
-    #[Route('/employesListe', name: 'app_employeList')]
+    #[Route('/employesListe', name: 'app_employesListe')]
     public function employeList(EntityManagerInterface $entityManager): Response
     {
         $repoEmploye = $entityManager->getRepository(Employe::class);
@@ -35,33 +35,23 @@ class EmployeController extends AbstractController
     }
 
 
-    // Récupération du tableau d'employés de l'entreprise (Déplacé dans /entrepriseDetail)
-    // #[Route('/entrepriseEmployesListe/{idEntreprise}', name: 'app_entrepriseEmployesListe')]
-    // public function entrepriseEmployesListe(EntityManagerInterface $entityManager, int $idEntreprise): Response
+    // Détail de l'employé (méthode longue/compliquée)
+    // #[Route('/employeDetail/{id}', name: 'app_employeDetail')]
+    // public function employeDetail(EntityManagerInterface $entityManager, int $id): Response
     // {
     //     $repoEmploye = $entityManager->getRepository(Employe::class);
-    //     $repoEntreprise = $entityManager->getRepository(Entreprise::class);
 
-    //     $entreprise = $repoEntreprise->find($idEntreprise);
-    //     $employesList = $repoEmploye->findBy(['entreprise' => $entreprise->getId()]);
+    //     $employe = $repoEmploye->find($id);
 
-    //     return $this->render('employe/employesList.html.twig', [
-    //         'employesArray' => $employesList,
-    //         'entreprise' => $entreprise
-    //         // 'entrepriseName' => $repoEntreprise->find($entreprise)->getRaisonSociale(),
-    //         // OU 'entreprise' => $repoEntreprise->find($idEntreprise) (et récup le .nom dans la vue),
+    //     return $this->render('employe/employeDetail.html.twig', [
+    //         'employe' => $employe
     //     ]);
     // }
 
-
-    // Détail de l'employé
-    #[Route('/employeDetail/{idEmploye}', name: 'app_employeDetail')]
-    public function employeDetail(EntityManagerInterface $entityManager, int $idEmploye): Response
+    // Détail de l'employé (méthode rapide/opti)
+    #[Route('/employeDetail/{id}', name: 'app_employeDetail')]
+    public function employeDetail(Employe $employe): Response
     {
-        $repoEmploye = $entityManager->getRepository(Employe::class);
-
-        $employe = $repoEmploye->find($idEmploye);
-
         return $this->render('employe/employeDetail.html.twig', [
             'employe' => $employe
         ]);

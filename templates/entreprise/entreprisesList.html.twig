@@ -6,11 +6,12 @@
 
     <h1>Liste globale de toutes les entreprises</h1>
 
-    <a href="accueil">Retour</a>
+    <a href="{{ path('app_accueil') }}">Retour</a>
     <br><br>
 
     {% for entreprise in entreprisesArray  %}
-        <a href="/entrepriseDetail/{{entreprise.id}}">{{ entreprise.raisonSociale }}</a>
+        {# <a href="/entrepriseDetail/{{entreprise.id}}">{{ entreprise.raisonSociale }}</a> #}
+        <a href="{{ path('app_entrepriseDetail', {'id': entreprise.id}) }}">{{ entreprise.raisonSociale }}</a>
     {% endfor %}
 
 {% endblock %}

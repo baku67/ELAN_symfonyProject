@@ -6,11 +6,12 @@
 
     <h1>Liste des employés de l'entreprise "{{ entreprise.raisonSociale }}"</h1>
 
-    <a href="/accueil">Retour</a>
+    <a href="{{ path('app_accueil') }}">Retour</a>
     <br>
 
     {% for employe in employesArray  %}
-        <a href="/employeDetail/{{ employe.id }}">{{ employe.prenom }} {{ employe.nom | upper }}</a>
+        {# <a href="/employeDetail/{{employe.id}}">{{ employe.prenom }} {{ employe.nom | upper }}</a> #}
+        <a href="{{ path('app_employeDetail', {'id': employe.id}) }}">{{ employe.prenom }} {{ employe.nom | upper }}</a>
         <br>
     {% endfor %}
 
