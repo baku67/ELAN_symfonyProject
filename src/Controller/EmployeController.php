@@ -5,10 +5,13 @@ namespace App\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Employe;
 use App\Entity\Entreprise;
+use App\Form\EmployeType;
+
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class EmployeController extends AbstractController
 {
@@ -54,6 +57,36 @@ class EmployeController extends AbstractController
     {
         return $this->render('employe/employeDetail.html.twig', [
             'employe' => $employe
+        ]);
+    }
+
+
+
+    // Gère l'affichage du form d'ajout/modification MAIS GERE AUSSI l'envoi du form (if isSubmitted)
+    #[Route('/employe/add', name: 'app_addEmploye')]
+    public function add(EntityManagerInterface $entityManager, Employe $employe = null, Request $request): Response  {
+
+        $form = $this->createForm(EmployeType::class, $employe);
+        $form -> handleRequest($request);
+
+        // Vérifs/Filtres
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+
+                // Hydrataion "Employe $employe" a partir des données du form
+                $employe = $form->getData();
+                // Equivalent au prepare et execute PDO
+                $entityManager->persist($employe);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_employesListe');
+            }
+        }
+
+
+        // View qui affiche le formuaire d'ajout
+        return $this->render('employe/add.html.twig', [
+            'formAddEmploye' => $form->createView()
         ]);
     }
 

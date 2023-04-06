@@ -6,6 +6,8 @@
 
 ./public : contient dossier css/js/img et index
 
+(Twig) Dans un path: utiliser asset() quand fichier dans "public"
+
 
 Composer = "gestionnaire de dépendances / de packages"
 
@@ -90,3 +92,27 @@ templates (installer extension "Twig Langages 2")
     => Sur twig: déclaration de var =
         {% set bidulle = "bidulle" %}
     => Voir doc Twig
+
+
+
+Forms (liés ou non à des entités)
+    => "symfony console make:form"
+    => Entrer le nom du form (ex "EmployeType")
+    => Rattacher (ou non) à une entité
+    => Fichier "EmployeType" ajouté dans dossier Form (avec class et méthodes de génération du form)
+    (Si strucure BDD modifiée, modifier à la main dans les forms)
+
+    => Dans le controller, la meme fonction permet d'afficher le form (si !isSubmitted()), ou de gérer l'envoi du form (Création entité ou Modification entité), champs pré-remplis si modif
+    => Dans Twig {{ form(formAddEntreprise) }}   (nom du form passé du controller)
+
+
+
+[Controller]: fonction simplifié pour getById (plutot que d'avoir à appeler un Repository):
+
+    #[Route('/employeDetail/{id}', name: 'app_employeDetail')]
+    public function employeDetail(Employe $employe): Response
+    {
+        return $this->render('employe/employeDetail.html.twig', [
+            'employe' => $employe
+        ]);
+    }

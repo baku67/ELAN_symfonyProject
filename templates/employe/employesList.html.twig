@@ -7,7 +7,10 @@
     <h1>Liste des employés de l'entreprise "{{ entreprise.raisonSociale }}"</h1>
 
     <a href="{{ path('app_accueil') }}">Retour</a>
-    <br>
+
+    <br><br>
+    <a href="{{ path('app_addEmploye') }}">Ajouter un employé</a>
+    <br><br>
 
     {% for employe in employesArray  %}
         {# <a href="/employeDetail/{{employe.id}}">{{ employe.prenom }} {{ employe.nom | upper }}</a> #}

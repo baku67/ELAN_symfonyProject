@@ -14,6 +14,7 @@
     <h2>Infos</h2>
     <p>Année de création: {{ entreprise.dateCreation | date('Y') }}</p>
     <p>Ancienneté: {{ entreprise.age }}ans</p>
+    <p>Directeur: </p>
     {# <p>Adresse: {{ entreprise.adresse }}, {{ entreprise.cp }} {{ entreprise.ville }} </p> #}
     <p>Adresse: {{ entreprise.fullAdress }}</p>
 
@@ -25,10 +26,14 @@
         <br>
     {% endfor %} #}
     {# Meilleure méthode (on passe par la collection d'employe de l'entreprise) #}
-    {% for employe in entreprise.employes  %}
-        <a href="{{ path('app_employeDetail', {'id': employe.id}) }}">{{ employe.prenom }} {{ employe.nom | upper }}</a>
-        <br>
-    {% endfor %}
+    {% if entreprise.employes | length == 0 %}
+        <p>Pas de salariés ici</p>
+    {% else %}
+        {% for employe in entreprise.employes  %}
+            <a href="{{ path('app_employeDetail', {'id': employe.id}) }}">{{ employe.prenom }} {{ employe.nom | upper }}</a>
+            <br>
+        {% endfor %}
+    {% endif %}
 
 
 {% endblock %}

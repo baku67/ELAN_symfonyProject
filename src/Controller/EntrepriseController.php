@@ -5,10 +5,12 @@ namespace App\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Employe;
 use App\Entity\Entreprise;
+use App\Form\EntrepriseType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class EntrepriseController extends AbstractController
 {
@@ -48,6 +50,36 @@ class EntrepriseController extends AbstractController
         return $this->render('entreprise/entrepriseDetail.html.twig', [
             // 'employesArray' => $employesList,
             'entreprise' => $entreprise
+        ]);
+    }
+
+
+
+    // Gère l'affichage du form d'ajout/modification MAIS GERE AUSSI l'envoi du form (if isSubmitted)
+    #[Route('/entreprise/add', name: 'app_addEntreprise')]
+    public function add(EntityManagerInterface $entityManager, Entreprise $entreprise = null, Request $request): Response  {
+
+        $form = $this->createForm(EntrepriseType::class, $entreprise);
+        $form -> handleRequest($request);
+
+        // Vérifs/Filtres
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+
+                // Hydrataion "Entreprise $entreprise" a partir des données du form
+                $entreprise = $form->getData();
+                // Equivalent au prepare et execute PDO
+                $entityManager->persist($entreprise);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_entreprisesListe');
+            }
+        }
+
+
+        // View qui affiche le formuaire d'ajout
+        return $this->render('entreprise/add.html.twig', [
+            'formAddEntreprise' => $form->createView()
         ]);
     }
     
