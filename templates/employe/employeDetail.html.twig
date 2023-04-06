@@ -13,13 +13,14 @@
     
     {# Infos employé #}
     <h2>Infos</h2>
-    <p>Date de naissance: {{ employe.dateNaissance | date('m/d/Y')}}</p>
+    <p>Date de naissance: {{ employe.dateNaissance | date('m/d/Y')}} ({{ employe.age }}ans)</p>
     <p>Ville: {{ employe.ville }}</p>
 
     <br><br>
     <h2>Emploi actuel</h2>
     <p>Entreprise: <a href="{{ path('app_entrepriseDetail', {'id':employe.entreprise.id}) }}">{{ employe.entreprise.raisonSociale }}</a></p>
     <p>Date d'embauche: {{ employe.dateEmbauche | date('m/d/Y')}}</p>
+    <p>Ancienneté: {{ employe.ancienneté }}ans</p>
 
 
 {% endblock %}

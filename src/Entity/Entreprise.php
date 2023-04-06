@@ -104,6 +104,23 @@ class Entreprise
         return $this;
     }
 
+
+    public function getFullAdress() {
+        return $this->adresse. ", " . $this->cp . " " . $this->ville;
+    }
+
+
+    public function getAge() {
+
+        $now = new \DateTime();
+        $interval = date_diff($this->dateCreation, $now);
+        return $interval->format("%Y");
+
+    }
+
+
+
+
     /**
      * @return Collection<int, Employe>
      */

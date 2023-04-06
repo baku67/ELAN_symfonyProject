@@ -47,6 +47,7 @@ Migration (pour générer les tables et relations en base de données)
 EN 2 lignes (préparation puis exécution)
     => "symfony console make:migration" (COMME GIT STATUS: diff entre les entitiesSymfony et les EntitéesBDD, fichier dispo dans ./migrations)
         -> Dans le fichier de migration: on peut par exemple renameColumn (dans la fonction up(): $this->renameColumn('my_table', 'old_column_name', 'new_column_name');)
+    => Pour modifs: "symfony console dictrine:schéma:update --force
     => "symfony console doctrine:migrationS:migrate"
     => Sure? Oui
     => Constater sur Heidi (entités, champs, clées étrangères, NULLable)
