@@ -38,29 +38,6 @@ class EmployeController extends AbstractController
     }
 
 
-    // Détail de l'employé (méthode longue/compliquée)
-    // #[Route('/employeDetail/{id}', name: 'app_employeDetail')]
-    // public function employeDetail(EntityManagerInterface $entityManager, int $id): Response
-    // {
-    //     $repoEmploye = $entityManager->getRepository(Employe::class);
-
-    //     $employe = $repoEmploye->find($id);
-
-    //     return $this->render('employe/employeDetail.html.twig', [
-    //         'employe' => $employe
-    //     ]);
-    // }
-
-    // Détail de l'employé (méthode rapide/opti)
-    #[Route('/employeDetail/{id}', name: 'app_employeDetail')]
-    public function employeDetail(Employe $employe): Response
-    {
-        return $this->render('employe/employeDetail.html.twig', [
-            'employe' => $employe
-        ]);
-    }
-
-
 
     // Gère l'affichage du form d'ajout/modification MAIS GERE AUSSI l'envoi du form (if isSubmitted)
     #[Route('/employe/add', name: 'app_addEmploye')]
@@ -87,6 +64,30 @@ class EmployeController extends AbstractController
         // View qui affiche le formuaire d'ajout
         return $this->render('employe/add.html.twig', [
             'formAddEmploye' => $form->createView()
+        ]);
+    }
+
+
+
+    // Détail de l'employé (méthode longue/compliquée)
+    // #[Route('/employeDetail/{id}', name: 'app_employeDetail')]
+    // public function employeDetail(EntityManagerInterface $entityManager, int $id): Response
+    // {
+    //     $repoEmploye = $entityManager->getRepository(Employe::class);
+
+    //     $employe = $repoEmploye->find($id);
+
+    //     return $this->render('employe/employeDetail.html.twig', [
+    //         'employe' => $employe
+    //     ]);
+    // }
+
+    // Détail de l'employé (méthode rapide/opti)
+    #[Route('/employeDetail/{id}', name: 'app_employeDetail')]
+    public function employeDetail(Employe $employe): Response
+    {
+        return $this->render('employe/employeDetail.html.twig', [
+            'employe' => $employe
         ]);
     }
 

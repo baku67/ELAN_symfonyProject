@@ -16,15 +16,25 @@ class EntrepriseType extends AbstractType
     {
         // Widget single_text pour calendrier
         $builder
-            ->add('raisonSociale', TextType::class)
-            ->add('dateCreation', DateType::class, [
-                'widget' => 'single_text'
+            ->add('raisonSociale', TextType::class, [
+                'attr' => ['class' => 'form-control']
             ])
-            ->add('adresse', TextType::class)
-            ->add('cp', TextType::class)
-            ->add('ville', TextType::class)
-            ->add('submit', SubmitType::class)
-        ;
+            ->add('dateCreation', DateType::class, [
+                'widget' => 'single_text',
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('adresse', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('cp', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('ville', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('submit', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-secondary']
+            ])        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

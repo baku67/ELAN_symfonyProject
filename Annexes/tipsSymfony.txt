@@ -72,7 +72,8 @@ Controller (symfony.com/current/doctrine.html#fetching-objects-from-the-database
 
     Route 
         => précisée en commentaire au dessus de chaque méthode du controller (/!\ commentaire vital)
-        => 1 unique par méthode
+        => Unique (aucun doublon)
+        => On peut associer 2 routes différentes(!) à la même fonction du controller (ex: /entreprise/add et /entreprise/edit pour la fonction du form add/modif entity)
         => C'est un genre de raccourcis (équivalent au ctrl=truc&action=bidul)
             ex: '/employe' est la route de la méthode index du EmployeController
         => La route est "tapable" dans l'url (vu qu'elle sollicite le controller) ex "127.0.0.1:3306/employe"

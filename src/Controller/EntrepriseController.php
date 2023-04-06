@@ -37,23 +37,6 @@ class EntrepriseController extends AbstractController
     }
 
 
-    // Détail de l'entreprise (+ Récupération du tableau d'employés de l'entreprise: remplacé par entreprise.employes ans Twig)
-    #[Route('/entrepriseDetail/{id}', name: 'app_entrepriseDetail')]
-    public function entrepriseDetail(EntityManagerInterface $entityManager, int $id): Response
-    {
-        $repoEntreprise = $entityManager->getRepository(Entreprise::class);
-        // $repoEmploye = $entityManager->getRepository(Employe::class);
-
-        $entreprise = $repoEntreprise->find($id);
-        // $employesList = $repoEmploye->findBy(['entreprise' => $entreprise->getId()]);
-
-        return $this->render('entreprise/entrepriseDetail.html.twig', [
-            // 'employesArray' => $employesList,
-            'entreprise' => $entreprise
-        ]);
-    }
-
-
 
     // Gère l'affichage du form d'ajout/modification MAIS GERE AUSSI l'envoi du form (if isSubmitted)
     #[Route('/entreprise/add', name: 'app_addEntreprise')]
@@ -83,6 +66,23 @@ class EntrepriseController extends AbstractController
         ]);
     }
     
+    
+
+    // Détail de l'entreprise (+ Récupération du tableau d'employés de l'entreprise: remplacé par entreprise.employes ans Twig)
+    #[Route('/entrepriseDetail/{id}', name: 'app_entrepriseDetail')]
+    public function entrepriseDetail(EntityManagerInterface $entityManager, int $id): Response
+    {
+        $repoEntreprise = $entityManager->getRepository(Entreprise::class);
+        // $repoEmploye = $entityManager->getRepository(Employe::class);
+
+        $entreprise = $repoEntreprise->find($id);
+        // $employesList = $repoEmploye->findBy(['entreprise' => $entreprise->getId()]);
+
+        return $this->render('entreprise/entrepriseDetail.html.twig', [
+            // 'employesArray' => $employesList,
+            'entreprise' => $entreprise
+        ]);
+    }
     
 
 
