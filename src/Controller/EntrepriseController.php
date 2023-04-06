@@ -27,7 +27,7 @@ class EntrepriseController extends AbstractController
         $repoEntreprise = $entityManager->getRepository(Entreprise::class);
 
         // récupération du tableau d'employés de l'entreprise
-        $entreprisesListe = $repoEntreprise->findAll();
+        $entreprisesListe = $repoEntreprise->findBy([], ['raisonSociale' => 'DESC']);
 
         return $this->render('entreprise/entreprisesList.html.twig', [
             'entreprisesArray' => $entreprisesListe

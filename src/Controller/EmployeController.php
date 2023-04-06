@@ -27,7 +27,7 @@ class EmployeController extends AbstractController
         $repoEntreprise = $entityManager->getRepository(Entreprise::class);
 
         // récupération du tableau d'employés de l'entreprise
-        $employesList = $repoEmploye->findAll();
+        $employesList = $repoEmploye->findBy([], ["nom" => "ASC"]);
 
         return $this->render('employe/globalEmployesList.html.twig', [
             'employesArray' => $employesList

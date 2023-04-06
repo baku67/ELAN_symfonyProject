@@ -76,6 +76,7 @@ Controller (symfony.com/current/doctrine.html#fetching-objects-from-the-database
 
 
 templates (installer extension "Twig Langages 2")
+    =>  {{ dump(var) }} 
     =>  {% block body %} 
             Contenu injecté dans le layout (base.html.twig)
         {% endblock %}
