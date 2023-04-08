@@ -13,7 +13,20 @@
     
 
 
-    {{ form(formAddEntreprise) }}
+    {# {{ form(formAddEntreprise) }} #}
+
+
+    {# Custom form #}
+    {{ form_start(formAddEntreprise) }}
+        {{ form_row(formAddEntreprise.raisonSociale)}}
+        {{ form_row(formAddEntreprise.dateCreation)}}
+        <div class="inline">
+            {{ form_row(formAddEntreprise.adresse)}}, 
+             {{ form_row(formAddEntreprise.cp)}}
+            {{ form_row(formAddEntreprise.ville)}}
+        </div>
+        {{ form_row(formAddEntreprise.submit)}}
+    {{ form_end(formAddEntreprise) }}
 
 
 {% endblock %}
