@@ -10,6 +10,7 @@
 
 
 Composer = "gestionnaire de dépendances / de packages"
+Apres clone projet: "composer install" (pour charger les packages/dependances .vendor etc)
 
 Terminal: Ctrl+C Pour interrompre manip 
 
@@ -47,9 +48,9 @@ Dire si on veut que le(s) entités liée(s) à l'entité de départ sont supprim
 
 Migration (pour générer les tables et relations en base de données)
 EN 2 lignes (préparation puis exécution)
-    => "symfony console make:migration" (COMME GIT STATUS: diff entre les entitiesSymfony et les EntitéesBDD, fichier dispo dans ./migrations)
+    => "symfony console make:migration" (A n'utiliser qu'une fois au debut, car erase toutes les données, fichier dispo dans ./migrations)
         -> Dans le fichier de migration: on peut par exemple renameColumn (dans la fonction up(): $this->renameColumn('my_table', 'old_column_name', 'new_column_name');)
-    => Pour modifs: "symfony console dictrine:schéma:update --force
+    => Pour modifs: "symfony console dictrine:schema:update --force"
     => "symfony console doctrine:migrationS:migrate"
     => Sure? Oui
     => Constater sur Heidi (entités, champs, clées étrangères, NULLable)

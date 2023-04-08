@@ -38,9 +38,15 @@ class EntrepriseController extends AbstractController
 
 
 
-    // Gère l'affichage du form d'ajout/modification MAIS GERE AUSSI l'envoi du form (if isSubmitted)
+    // Gère l'affichage du form d'ajout/modification MAIS GERE AUSSI l'envoi du form (if isSubmitted  ou juste affichage form)
+    #[Route('/entreprise/{id}/edit', name: 'app_editEntreprise')]
     #[Route('/entreprise/add', name: 'app_addEntreprise')]
     public function add(EntityManagerInterface $entityManager, Entreprise $entreprise = null, Request $request): Response  {
+
+        // On vérifie dans quel cas on est (création ou modification de l'entité)
+        if(!$entreprise) {
+            $entreprise = new Entreprise();
+        }
 
         $form = $this->createForm(EntrepriseType::class, $entreprise);
         $form -> handleRequest($request);

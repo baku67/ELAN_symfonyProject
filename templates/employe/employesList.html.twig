@@ -13,9 +13,11 @@
     <br><br>
 
     {% for employe in employesArray  %}
-        {# <a href="/employeDetail/{{employe.id}}">{{ employe.prenom }} {{ employe.nom | upper }}</a> #}
+
         <a href="{{ path('app_employeDetail', {'id': employe.id}) }}">{{ employe.prenom }} {{ employe.nom | upper }}</a>
+        <a class="btn btn-warning" href="{{ path('app_editEmploye', {'id': employe.id}) }}">Éditer</a>
         <br>
+
     {% endfor %}
 
 {% endblock %}

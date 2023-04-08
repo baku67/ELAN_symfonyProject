@@ -39,9 +39,15 @@ class EmployeController extends AbstractController
 
 
 
-    // Gère l'affichage du form d'ajout/modification MAIS GERE AUSSI l'envoi du form (if isSubmitted)
+    // Gère l'affichage du form d'ajout/modification MAIS GERE AUSSI l'envoi du form (if isSubmitted ou juste affichage form)
+    #[Route('/employe/{id}/edit', name: 'app_editEmploye')]
     #[Route('/employe/add', name: 'app_addEmploye')]
     public function add(EntityManagerInterface $entityManager, Employe $employe = null, Request $request): Response  {
+
+        // On vérifie dans quel cas on est (création ou modification de l'entité)
+        if(!$employe) {
+            $employe = new Employe();
+        }
 
         $form = $this->createForm(EmployeType::class, $employe);
         $form -> handleRequest($request);
@@ -59,7 +65,6 @@ class EmployeController extends AbstractController
                 return $this->redirectToRoute('app_employesListe');
             }
         }
-
 
         // View qui affiche le formuaire d'ajout
         return $this->render('employe/add.html.twig', [

@@ -14,9 +14,11 @@
 
 
     {% for entreprise in entreprisesArray  %}
-        {# <a href="/entrepriseDetail/{{entreprise.id}}">{{ entreprise.raisonSociale }}</a> #}
+
         <a href="{{ path('app_entrepriseDetail', {'id': entreprise.id}) }}">{{ entreprise.raisonSociale }}</a>
+        <a class="btn btn-warning" href="{{ path('app_editEntreprise', {'id': entreprise.id}) }}">Éditer</a>
         <br>
+
     {% endfor %}
 
 {% endblock %}
