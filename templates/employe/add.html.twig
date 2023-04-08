@@ -4,7 +4,12 @@
 
 {% block body %}
 
-    <h1>Ajouter/Modifier un employé</h1>
+    {% if edit %}
+        <h1>Modifier un employé</h1>
+    {% else %}
+        <h1>Ajouter un employé</h1>
+    {% endif %}
+    
 
     {{ form(formAddEmploye) }}
 

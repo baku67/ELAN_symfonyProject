@@ -16,6 +16,7 @@
 
         <a href="/employeDetail/{{ employe.id }}">{{ employe.prenom }} {{ employe.nom | upper }}</a>
         <a class="btn btn-warning" href="{{ path('app_editEmploye', {'id': employe.id}) }}">Éditer</a>
+        <a class="btn btn-danger" href="{{ path('app_deleteEmploye', {'id': employe.id}) }}">Supprimer</a>
         <br>
 
     {% endfor %}

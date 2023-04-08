@@ -58,7 +58,7 @@ class EmployeController extends AbstractController
 
                 // Hydrataion "Employe $employe" a partir des données du form
                 $employe = $form->getData();
-                // Equivalent au prepare et execute PDO
+                // Equivalent au prepare et execute PDO (persist() avant si ajout en BDD !)
                 $entityManager->persist($employe);
                 $entityManager->flush();
 
@@ -68,8 +68,25 @@ class EmployeController extends AbstractController
 
         // View qui affiche le formuaire d'ajout
         return $this->render('employe/add.html.twig', [
-            'formAddEmploye' => $form->createView()
+            'formAddEmploye' => $form->createView(),
+            // Si y'a Id c'est q'on modifie (sinon renvoie false, = création), pour le titre de la page
+            "edit" => $employe->getId()
         ]);
+    }
+
+
+
+    #[Route('/employe/{id}/delete', name: 'app_deleteEmploye')]
+    public function delete(EntityManagerInterface $entityManager, Employe $employe): Response {
+    
+        // Suppression
+        $entityManager->remove($employe);
+        // pas de persist() ici (uniquement pour ajout en BDD), execution de l'action avec flush
+        $entityManager->flush();
+
+        // Redirection sur la route d'affichage de la liste 
+        return $this->redirectToRoute('app_employesListe');
+
     }
 
 
@@ -86,6 +103,8 @@ class EmployeController extends AbstractController
     //         'employe' => $employe
     //     ]);
     // }
+
+
 
     // Détail de l'employé (méthode rapide/opti)
     #[Route('/employeDetail/{id}', name: 'app_employeDetail')]

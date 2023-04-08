@@ -17,6 +17,7 @@
 
         <a href="{{ path('app_entrepriseDetail', {'id': entreprise.id}) }}">{{ entreprise.raisonSociale }}</a>
         <a class="btn btn-warning" href="{{ path('app_editEntreprise', {'id': entreprise.id}) }}">Éditer</a>
+        <a class="btn btn-danger" href="{{ path('app_deleteEntreprise', {'id': entreprise.id}) }}">Supprimer</a>
         <br>
 
     {% endfor %}

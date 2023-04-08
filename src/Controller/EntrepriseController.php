@@ -38,7 +38,7 @@ class EntrepriseController extends AbstractController
 
 
 
-    // Gère l'affichage du form d'ajout/modification MAIS GERE AUSSI l'envoi du form (if isSubmitted  ou juste affichage form)
+    // Gère l'affichage du form d'ajout/modification MAIS GERE AUSSI l'envoi du form (if isSubmitted  ou juste affichage form )
     #[Route('/entreprise/{id}/edit', name: 'app_editEntreprise')]
     #[Route('/entreprise/add', name: 'app_addEntreprise')]
     public function add(EntityManagerInterface $entityManager, Entreprise $entreprise = null, Request $request): Response  {
@@ -57,7 +57,7 @@ class EntrepriseController extends AbstractController
 
                 // Hydrataion "Entreprise $entreprise" a partir des données du form
                 $entreprise = $form->getData();
-                // Equivalent au prepare et execute PDO
+                // Equivalent au prepare et execute PDO (persist() avant si ajout en BDD !)
                 $entityManager->persist($entreprise);
                 $entityManager->flush();
 
@@ -68,11 +68,25 @@ class EntrepriseController extends AbstractController
 
         // View qui affiche le formuaire d'ajout
         return $this->render('entreprise/add.html.twig', [
-            'formAddEntreprise' => $form->createView()
+            'formAddEntreprise' => $form->createView(),
+            // Si y'a Id c'est q'on modifie (sinon renvoie false, = création), pour le titre de la page
+            'edit' => $entreprise->getId()
         ]);
     }
+
+
+    #[Route('/entreprise/{id}/delete', name: 'app_deleteEntreprise')]
+    public function delete(EntityManagerInterface $entityManager, Entreprise $entreprise): Response {
     
-    
+        // Suppression
+        $entityManager->remove($entreprise);
+        // pas de persist() ici (uniquement pour ajout en BDD), execution de l'action avec flush
+        $entityManager->flush();
+
+        // Redirection sur la route d'affichage de la liste 
+        return $this->redirectToRoute('app_entreprisesListe');
+    }
+
 
     // Détail de l'entreprise (+ Récupération du tableau d'employés de l'entreprise: remplacé par entreprise.employes ans Twig)
     #[Route('/entrepriseDetail/{id}', name: 'app_entrepriseDetail')]
